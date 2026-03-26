@@ -30,3 +30,38 @@
 
 ### 7. Database (SQLite)
 - Stores data
+
+## Module APIs
+
+### csv_loader.py
+- load_csv(file_path)
+- infer_column_types(dataframe)
+- insert_rows(connection, table_name, dataframe)
+
+### schema_manager.py
+- get_existing_tables(connection)
+- get_table_schema(connection, table_name)
+- create_table(connection, table_name, columns)
+- schemas_match(csv_schema, db_schema)
+
+### query_service.py
+- run_sql_query(connection, sql)
+- run_natural_language_query(connection, user_query, schema_info)
+- format_results(rows)
+
+### sql_validator.py
+- is_select_query(sql)
+- extract_table_names(sql)
+- extract_column_names(sql)
+- validate_sql(sql, schema_info)
+
+### llm_adapter.py
+- generate_sql(user_query, schema_info)
+
+### db.py
+- connect_db(db_path)
+- execute_query(connection, sql)
+- fetch_all(connection, sql)
+
+### cli.py
+- run_cli()
