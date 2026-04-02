@@ -52,3 +52,10 @@ To run a specific test file:
 ```bash
 pytest tests/test_query_service.py
 ```
+## LLM Adapter Design
+
+The system includes a modular LLM adapter layer (`src/llm_adapter.py`) responsible for translating natural language user requests into SQL statements.
+
+For this MVP, the adapter uses a lightweight rule-based translation strategy to simulate the behavior of an LLM-generated SQL interface while preserving modularity and testability.
+
+The generated SQL is always treated as untrusted input and is validated by the SQL validator before execution.
