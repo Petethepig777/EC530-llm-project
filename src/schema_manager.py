@@ -34,3 +34,15 @@ def create_table(connection, table_name, columns):
 
 def schemas_match(csv_schema, db_schema):
     return csv_schema == db_schema
+
+
+def handle_schema_conflict():
+    print("Schema conflict detected.")
+    print("Choose one option: overwrite / rename / skip")
+    choice = input("Enter choice: ").strip().lower()
+
+    if choice in ["overwrite", "rename", "skip"]:
+        return choice
+
+    print("Invalid choice. Defaulting to skip.")
+    return "skip"

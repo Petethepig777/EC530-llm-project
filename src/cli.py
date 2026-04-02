@@ -5,6 +5,7 @@ from src.schema_manager import (
     get_table_schema,
     create_table,
     schemas_match,
+    handle_schema_conflict,
 )
 from src.query_service import run_sql_query, run_natural_language_query
 
@@ -35,6 +36,23 @@ def handle_load_csv(connection):
                 print("Data appended successfully.")
             else:
                 print("Schema does not match existing table.")
+                choice = handle_schema_conflict()
+
+                if choice == "overwrite":
+                    execute_query(connection, f"DROP TABLE IF EXISTS {table_name}")
+                    create_table(connection, table_name, csv_schema)
+                    insert_rows(connection, table_name, dataframe)
+                    print("Table overwritten and data inserted successfully.")
+
+                elif choice == "rename":
+                    new_table_name = input("Enter new table name: ").strip()
+                    create_table(connection, new_table_name, csv_schema)
+                    insert_rows(connection, new_table_name, dataframe)
+                    print(f"New table '{new_table_name}' created and data inserted successfully.")
+
+                elif choice == "skip":
+                    print("Skipped loading CSV.")
+
         else:
             create_table(connection, table_name, csv_schema)
             insert_rows(connection, table_name, dataframe)
