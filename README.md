@@ -38,3 +38,17 @@ show all students
 - src/query_service.py
 - src/cli.py
 - main.py
+
+## How to Run Tests
+
+In the terminal, run:
+
+```bash
+pytest
+```
+
+To run a specific test file:
+
+```bash
+pytest tests/test_query_service.py
+```
